@@ -1,5 +1,5 @@
-import javax.swing.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class App {
 
@@ -10,9 +10,9 @@ public class App {
 
         // array of strings
         String[] top5 = {
-            "1. Coding",
+            "1. Sleep",
             "2. Music",
-            "3. Movies",
+            "3. Food",
             "4. Sports",
             "5. Travel"
         };
