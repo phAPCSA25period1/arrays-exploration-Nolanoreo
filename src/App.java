@@ -1,16 +1,14 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class App {
 
-    // variable to keep track of current index in the list
-    // --- TO DO: why is this static? ---
-    private static int currentIndex = 0;
+    // keeps track of which item is being shown
+    static int currentIndex = 0;
 
-    public static void main(String[] args) throws Exception {
-        // create a list of top 5 things
-        // --- TO DO: Change to your own list ---
+    public static void main(String[] args) {
+
+        // array of strings
         String[] top5 = {
             "1. Coding",
             "2. Music",
@@ -19,67 +17,54 @@ public class App {
             "5. Travel"
         };
 
-         // A JFrame is a window where we can design our UI
         JFrame frame = new JFrame("My Top 5 List");
-        frame.setSize(500, 500);
+        frame.setSize(400, 300);
         frame.setLayout(null);
 
-        // create a Button and a Label
+        JLabel outputLabel = new JLabel(top5[currentIndex]);
         JButton nextButton = new JButton("Next");
-        JLabel outputLabel = new JLabel();
-        // --- TO DO: create a back button, format, and add it to the frame ---
+        JButton backButton = new JButton("Back");
 
-        // place and size for components
-        // setBounds(x position, y position, width, height)
-        nextButton.setBounds(100, 200, 100, 50);
-        outputLabel.setBounds(100,100,200,50);
-        outputLabel.setFont(new Font("Arial", Font.PLAIN, 32));
-        outputLabel.setForeground(Color.BLUE);
+        outputLabel.setBounds(100, 50, 200, 30);
+        nextButton.setBounds(200, 120, 80, 30);
+        backButton.setBounds(80, 120, 80, 30);
 
-        // the output label will display the first item in the list initially
-        outputLabel.setText( top5[currentIndex] );
-
-        // add components to JFrame f
         frame.add(outputLabel);
         frame.add(nextButton);
+        frame.add(backButton);
 
-        // add event listener for button click
+        // Next button
         nextButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            currentIndex = getNextIndex(currentIndex, top5.length);
-            outputLabel.setText(top5[currentIndex]);
-        }    });
+            public void actionPerformed(ActionEvent e) {
+                currentIndex = getNextIndex(currentIndex, top5.length);
+                outputLabel.setText(top5[currentIndex]);
+            }
+        });
 
-        // --- TO DO: add event listener for back button ---
-        // --- TO DO: create a getPreviousIndex function, see below ---
+        // Back button
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                currentIndex = getPreviousIndex(currentIndex, top5.length);
+                outputLabel.setText(top5[currentIndex]);
+            }
+        });
 
-
-        // make the frame visible
         frame.setVisible(true);
     }
 
-    /**
-     *  find the next index in the list
-     * @param currentIndex
-     * @param listLength
-     * @return next index
-     */
-        public static int getNextIndex(int currentIndex, int listLength) {
-            if (currentIndex == listLength - 1) {
-                return 0; // wrap around to the start
-            }
-            else {
-                return currentIndex + 1; // move to the next index
-            }
+    // returns the next index
+    public static int getNextIndex(int index, int length) {
+        if (index == length - 1) {
+            return 0;
         }
+        return index + 1;
+    }
 
-    // --- TO DO: create a getPreviousIndex function ---
-    /**
-     *  find the next index in the list
-     * @param currentIndex
-     * @param listLength
-     * @return previous index
-     */
-    
+    // returns the previous index
+    public static int getPreviousIndex(int index, int length) {
+        if (index == 0) {
+            return length - 1;
+        }
+        return index - 1;
+    }
 }
-
